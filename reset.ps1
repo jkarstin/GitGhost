@@ -1,7 +1,7 @@
 if ($args.count -ne 1) {
     Write-Error "Requires single argument <path_to_target_repo>!"
 }
-elseif (!Test-Path -Path $args[0]) {
+elseif (-Not (Test-Path -Path $args[0])) {
     $path = $args[0]
     Write-Error "Given <path_to_target_repo> ['$path'] could not be located!"
 }
