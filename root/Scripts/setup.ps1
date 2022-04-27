@@ -26,7 +26,6 @@ New-Item -Path . -Name 'main.py' -ItemType 'file' -Value @"
 
 import pygame
 import sys
-import typing
 
 
 ### CONSTANTS ###

@@ -17,7 +17,7 @@ Since you have likely cloned this repo in order to use it, you will want to inte
     - If you did not clone this repo into the chosen directory, feel free to run the `reset.ps1` script which was created to simplify this process for you.
     
 ```
-.\reset.ps1 <path_of_target_repo>
+.\reset.ps1 <path_to_target_repo>
 ```
 
 2. Once you are located at the target repo directory (of which the `DevScripts/` repo should be a subdirectory by now), run the `build.ps1` script as follows:
