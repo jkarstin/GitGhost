@@ -4,4 +4,4 @@ Move-Item .\root\* ..\
 Set-Location ..\
 Remove-Item -Recurse -Force .\DevScripts\
 
-.\Scripts\setup.ps1
+.\setup.ps1
