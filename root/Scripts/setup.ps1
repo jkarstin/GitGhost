@@ -2,11 +2,11 @@ python -m venv env
 ./env/Scripts/activate
 python -m pip install --upgrade pip
 
-New-Item -Path . -Name 'requirements.txt' -ItemType 'file' -Value @"
+New-Item ./requirements.txt -ItemType 'file' -Value @"
 pygame
 typing
 "@
-New-Item -Path . -Name 'requirements-dev.txt' -ItemType 'file' -Value @"
+New-Item ./requirements-dev.txt -ItemType 'file' -Value @"
 pytest
 pygame
 typing
@@ -14,7 +14,7 @@ typing
 python -m pip install -r 'requirements-dev.txt'
 
 $m_dd_yyyy = Get-Date -Format 'MM.dd.yyyy'
-New-Item -Path . -Name 'main.py' -ItemType 'file' -Value @"
+New-Item ./main.py -ItemType 'file' -Value @"
 #################################
 # main.py
 #-------------------------------
@@ -65,14 +65,15 @@ if __name__ == '__main__':
 "@
 
 $repo = Split-Path -Path $pwd -Leaf
-New-Item -Path . -Name '.gitignore' -ItemType 'file' -Value @"
+New-Item ./.gitignore -ItemType 'file' -Value @"
 env/
 *.ps1
 "@
-New-Item -Path . -Name 'README.md' -ItemType 'file' -Value @"
+New-Item ./README.md -ItemType 'file' -Value @"
 # $repo
 "@
 
+Remove-Item ./Scripts/setup.ps1
+
 git init .
-git add .
-git commit -m "Initial commit"
+git commit -a -m "Initial commit"
