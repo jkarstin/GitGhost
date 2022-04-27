@@ -13,11 +13,12 @@ typing
 "@
 python -m pip install -r 'requirements-dev.txt'
 
+$m_dd_yyyy = Get-Date -Format 'MM.dd.yyyy'
 New-Item -Path . -Name 'main.py' -ItemType 'file' -Value @"
 #################################
 # main.py
 #-------------------------------
-# J Karstin Neill    MM.DD.YYYY
+# J Karstin Neill    $m_dd_yyyy
 #################################
 
 
