@@ -1,0 +1,2 @@
+deactivate
+rm -Recurse env/
