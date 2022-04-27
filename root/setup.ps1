@@ -64,6 +64,15 @@ if __name__ == '__main__':
 
 "@
 
+New-Item ./test_main.py -ItemType 'file' -Value @"
+import main
+
+
+def test_main():
+    assert main.main(['test_main.py'], 1) == main.EXIT_SUCCESS
+
+"@
+
 $repo = Split-Path -Path $pwd -Leaf
 New-Item ./.gitignore -ItemType 'file' -Value @"
 env/
