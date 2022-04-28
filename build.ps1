@@ -16,7 +16,7 @@ else {
         $datestr = Get-Date -Format "MM.dd.yyyy @ HH:mm (UTCK)"
 
         Copy-Item ".\DevScripts\resources\common\README.md" ".\"
-        (((Get-Content ".\README.md" -Raw) -Replace "<REPO>",$repo) -Replace "<DATE_STRING>",$datestr) | Set-Content ".\README.md"
+        (((Get-Content ".\README.md" -Raw) -Replace "<REPO_NAME>",$repo) -Replace "<DATE_STRING>",$datestr) | Set-Content ".\README.md"
         
         Remove-Item -Recurse -Force ".\DevScripts\"
 
