@@ -1,4 +1,4 @@
-$ggrepo      = SplitPath $MyInvocation.MyCommand.Path -Parent
+$ggrepo      = Split-Path $MyInvocation.MyCommand.Path -Parent
 $ggresrouces = "$ggrepo\resources"
 $ggcommon    = "$ggresources\common"
 $buildrepo   = "$ggrepo\.."
