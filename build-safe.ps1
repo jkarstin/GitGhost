@@ -20,15 +20,21 @@ else {
         
         Set-Location $buildrepo
 
-        Copy-Item "$ggmodule\*" $buildrepo
-        Copy-Item "$ggcommon\*" $buildrepo
+        Copy-Item -Recurse "$ggmodule\*" $buildrepo
+
+        if (Test-Path "$buildrepo\.gitignore") {
+            $ggcommongi = Get-Content "$ggcommon\.gitignore"
+            Add-Content "$buildrepo\.gitignore" "`n`n#GitGhost`n$ggcommongi"
+        }
+        
+        Copy-Item "$ggcommon\README.md" $buildrepo
+        Copy-Item -Recurse "$ggcommon\GG" $buildrepo
 
         $reponame = Split-Path $buildrepo -Leaf
         $datestr = Get-Date -Format "MM.dd.yyyy @ HH:mm (UTCK)"
         (((Get-Content "$buildrepo\README.md" -Raw) -Replace "<REPO_NAME>",$reponame) -Replace "<DATE_STRING>",$datestr) | Set-Content "$buildrepo\README.md"
         
         .\setup.ps1
-        Remove-Item ".\setup.ps1"
 
         git init .
         git add .
