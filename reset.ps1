@@ -8,6 +8,7 @@ else {
     }
     else {
         $old = Split-Path $MyInvocation.MyCommand.Path -Parent
+        Set-Location $old
         git remote rm origin
         Set-Location $path
         git clone https://github.com/jkarstin/DevScripts
