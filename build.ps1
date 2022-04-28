@@ -3,7 +3,7 @@ if ($args.count -ne 1) {
 }
 else {
     $ptype = $args[0]
-    if (-Not (Test-Path -Path ".\DevScripts\resources\$ptype")) {
+    if (-Not (Test-Path ".\DevScripts\resources\$ptype")) {
         Write-Error "Could not locate '$ptype' project type!"
     }
     else {
@@ -12,7 +12,7 @@ else {
         Move-Item ".\resources\$ptype\*" "..\"
 
         Set-Location "..\"
-        $repo = Split-Path -Path $pwd -Leaf
+        $repo = Split-Path $pwd -Leaf
         $datestr = Get-Date -Format "MM.dd.yyyy @ HH:mm (UTCK)"
 
         Copy-Item ".\DevScripts\resources\common\README.md" ".\"
