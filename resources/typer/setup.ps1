@@ -1,5 +1,5 @@
 python -m venv env
-./env/Scripts/activate
+./Scripts/activate
 python -m pip install --upgrade pip
 python -m pip install -r "requirements-dev.txt"
 
