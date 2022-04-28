@@ -1,24 +1,31 @@
+$ggrepo      = SplitPath $MyInvocation.MyCommand.Path -Parent
+$ggresrouces = "$ggrepo\resources"
+$ggcommon    = "$ggresources\common"
+$buildrepo   = "$ggrepo\.."
+
 if ($args.count -ne 1) {
-    Write-Error "Expected <project_type> argument!"
+    Write-Error "Expected <project_module> argument!"
 }
 else {
     $ptype = $args[0]
-    if (-Not (Test-Path ".\GitGhost\resources\$ptype")) {
-        Write-Error "Could not locate '$ptype' project type!"
+    $ggmodule = "$ggresources\$ptype"
+
+    if (-Not (Test-Path $ggmodule)) {
+        Write-Error "Could not locate '$ptype' project module!"
     }
     else {
-        Set-Location ".\GitGhost\"
+        Set-Location $ggrepo
         git remote rm origin
-        Move-Item ".\resources\$ptype\*" "..\"
+        Move-Item "$ggmodule\*" $buildrepo
 
-        Set-Location "..\"
-        $repo = Split-Path $pwd -Leaf
+        Set-Location $buildrepo
+        $reponame = Split-Path $buildrepo -Leaf
         $datestr = Get-Date -Format "MM.dd.yyyy @ HH:mm (UTCK)"
 
-        Copy-Item ".\GitGhost\resources\common\README.md" ".\"
-        (((Get-Content ".\README.md" -Raw) -Replace "<REPO_NAME>",$repo) -Replace "<DATE_STRING>",$datestr) | Set-Content ".\README.md"
+        Copy-Item "$ggcommon\README.md" $buildrepo
+        (((Get-Content ".\README.md" -Raw) -Replace "<REPO_NAME>",$reponame) -Replace "<DATE_STRING>",$datestr) | Set-Content ".\README.md"
         
-        Remove-Item -Recurse -Force ".\GitGhost\"
+        Remove-Item -Recurse -Force $ggrepo
 
         .\setup.ps1
         Remove-Item ".\setup.ps1"
