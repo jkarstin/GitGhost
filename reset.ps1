@@ -11,7 +11,7 @@ else {
         Set-Location $old
         git remote rm origin
         Set-Location $path
-        git clone https://github.com/jkarstin/DevScripts
+        git clone https://github.com/jkarstin/GitGhost
         Remove-Item -Recurse -Force $old
     }
 }

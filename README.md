@@ -1,4 +1,4 @@
-# DevScripts
+# GitGhost
 
 ## Purpose
 This repository is designed to automate the setup of a pygame project, including setting up a Git repository, initializing a starting script, generating requirements files, and then removing itself from the newly created repository.
@@ -20,8 +20,8 @@ Since you have likely cloned this repo in order to use it, you will want to inte
 .\reset.ps1 <path_to_target_repo>
 ```
 
-2. Once you are located at the target repo directory (of which the `DevScripts/` repo should be a subdirectory by now), run the `build.ps1` script as follows, where `<project_type>` is the name of a supported project type (currently only supports `pygame`)
+2. Once you are located at the target repo directory (of which the `GitGhost/` repo should be a subdirectory by now), run the `build.ps1` script as follows, where `<project_type>` is the name of a supported project type (currently only supports `pygame`)
 
 ```
-.\DevScripts\build.ps1 <project_type>
+.\GitGhost\build.ps1 <project_type>
 ```
