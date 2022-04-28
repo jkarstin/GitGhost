@@ -20,8 +20,8 @@ Since you have likely cloned this repo in order to use it, you will want to inte
 .\reset.ps1 <path_to_target_repo>
 ```
 
-2. Once you are located at the target repo directory (of which the `DevScripts/` repo should be a subdirectory by now), run the `build.ps1` script as follows:
+2. Once you are located at the target repo directory (of which the `DevScripts/` repo should be a subdirectory by now), run the `build.ps1` script as follows, where `<project_type>` is the name of a supported project type (currently only supports `pygame`)
 
 ```
-.\DevScripts\build.ps1
+.\DevScripts\build.ps1 <project_type>
 ```
