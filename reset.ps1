@@ -3,7 +3,7 @@ if ($args.count -ne 1) {
 }
 else {
     $buildrepo = $args[0]
-    if (-Not (Test-Path $path)) {
+    if (-Not (Test-Path $buildrepo)) {
         Write-Error "Given <path_to_target_repo> ['$buildrepo'] could not be located!"
     }
     else {
