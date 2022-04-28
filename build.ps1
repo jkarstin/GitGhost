@@ -26,6 +26,9 @@ else {
             $ggcommongi = Get-Content "$ggcommon\.gitignore"
             Add-Content "$buildrepo\.gitignore" "`n`n#GitGhost`n$ggcommongi"
         }
+        else {
+            Copy-Item "$ggcommon\.gitignore" $buildrepo
+        }
         
         Copy-Item "$ggcommon\README.md" $buildrepo
         Copy-Item -Recurse "$ggcommon\GG" $buildrepo
