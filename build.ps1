@@ -20,8 +20,16 @@ else {
         
         Set-Location $buildrepo
 
-        Move-Item "$ggmodule\*" $buildrepo
-        Move-Item "$ggcommon\*" $buildrepo
+        Copy-Item -Recurse "$ggmodule\*" $buildrepo
+
+        if (Test-Path "$buildrepo\.gitignore") {
+            $ggcommongi = Get-Content "$ggcommon\.gitignore"
+            Add-Content "$buildrepo\.gitignore" "`n`n#GitGhost`n$ggcommongi"
+        }
+        
+        Copy-Item "$ggcommon\README.md" $buildrepo
+        Copy-Item -Recurse "$ggcommon\GG" $buildrepo
+        
         Remove-Item -Recurse -Force $ggrepo
 
         $reponame = Split-Path $buildrepo -Leaf
