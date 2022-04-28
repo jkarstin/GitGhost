@@ -15,13 +15,14 @@ else {
     }
     else {
         Set-Location $ggrepo
+
         git remote rm origin
         Move-Item "$ggmodule\*" $buildrepo
 
         Set-Location $buildrepo
+
         $reponame = Split-Path $buildrepo -Leaf
         $datestr = Get-Date -Format "MM.dd.yyyy @ HH:mm (UTCK)"
-
         Copy-Item "$ggcommon\README.md" $buildrepo
         (((Get-Content ".\README.md" -Raw) -Replace "<REPO_NAME>",$reponame) -Replace "<DATE_STRING>",$datestr) | Set-Content ".\README.md"
 

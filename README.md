@@ -32,6 +32,7 @@ Since you have likely cloned this repo in order to use it, you will want to inte
 
 ### Currently-supported project modules
 - `pygame` - Moderately low-level Python library framework for developing video games using Python3
+- `typer`  - Python command-line application library framework for developing command-line tools using Python3
 - ... ***<ins>AND MORE</ins>*** (*soon...*)
 
 
