@@ -4,17 +4,15 @@ function Main {
     )
 
     $GGRepo      = Split-Path $MyInvocation.MyCommand.Path -Parent
-    $GGResources = $GGRepo\resources
-    $GGCommon    = $GGResources\common
-    $GGModules   = $GGRepo\modules
-
-    $GGModule = $GGModules\$GGMod
+    $GGResources = "$GGRepo\resources"
+    $GGCommon    = "$GGResources\common"
+    $GGModule    = "$GGRepo\modules\$GGMod"
 
     if (-Not (Test-Path $GGModule)) {
         Write-Error "Could not locate '$GGMod' module!"
     }
     else {
-        $BuildRepo = $GGRepo\..
+        $BuildRepo = "$GGRepo\.."
         $RepoName  = Split-Path $BuildRepo -Leaf
 
         Set-Location $GGRepo
