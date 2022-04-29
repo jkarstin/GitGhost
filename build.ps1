@@ -4,10 +4,10 @@ function Main {
     param (
         $GGMod
     )
-    
+
     $GGResources = "$GGRepo\resources"
     $GGCommon    = "$GGResources\common"
-    $GGModule    = "$GGRepo\modules\$GGMod"
+    $GGModule    = "$GGRepo\modules\$GGMod.gg"
 
     if (-Not (Test-Path $GGModule)) {
         Write-Error "Could not locate '$GGMod' module!"
@@ -40,8 +40,8 @@ function Main {
         $DateString = Get-Date -Format "MM.dd.yyyy @ HH:mm (UTCK)"
         (((Get-Content "$BuildRepo\README.md" -Raw) -Replace "<REPO_NAME>",$RepoName) -Replace "<DATE_STRING>",$DateString) | Set-Content "$BuildRepo\README.md"
         
-        .\setup.ps1
-        Remove-Item ".\setup.ps1"
+        .\.gg_init.ps1
+        Remove-Item ".\.gg_init.ps1"
 
         git init .
         git add .
