@@ -1,43 +1,45 @@
-$ggrepo      = Split-Path $MyInvocation.MyCommand.Path -Parent
-$ggresources = "$ggrepo\resources"
-$ggcommon    = "$ggresources\common"
-$buildrepo   = "$ggrepo\.."
+function Main {
+    param (
+        $GGMod
+    )
 
-if ($args.count -ne 1) {
-    Write-Error "Expected <project_module> argument!"
-}
-else {
-    $ptype = $args[0]
-    $ggmodule = "$ggresources\$ptype"
+    $GGRepo      = Split-Path $MyInvocation.MyCommand.Path -Parent
+    $GGResources = $GGRepo\resources
+    $GGCommon    = $GGResources\common
+    $GGModules   = $GGRepo\modules
 
-    if (-Not (Test-Path $ggmodule)) {
-        Write-Error "Could not locate '$ptype' project module!"
+    $GGModule = $GGModules\$GGMod
+
+    if (-Not (Test-Path $GGModule)) {
+        Write-Error "Could not locate '$GGMod' module!"
     }
     else {
-        Set-Location $ggrepo
+        $BuildRepo = $GGRepo\..
+        $RepoName  = Split-Path $BuildRepo -Leaf
+
+        Set-Location $GGRepo
         
         git remote rm origin
         
-        Set-Location $buildrepo
+        Set-Location $BuildRepo
 
-        Copy-Item -Recurse "$ggmodule\*" $buildrepo
+        Copy-Item -Recurse "$GGModule\*" $BuildRepo
 
-        if (Test-Path "$buildrepo\.gitignore") {
-            $ggcommongi = Get-Content "$ggcommon\.gitignore"
-            Add-Content "$buildrepo\.gitignore" "`n`n#GitGhost`n$ggcommongi"
+        if (Test-Path "$BuildRepo\.gitignore") {
+            $GGCommonGI = Get-Content "$GGCommon\.gitignore"
+            Add-Content "$BuildRepo\.gitignore" "`n`n#GitGhost`n$GGCommonGI"
         }
         else {
-            Copy-Item "$ggcommon\.gitignore" $buildrepo
+            Copy-Item "$GGCommon\.gitignore" $BuildRepo
         }
         
-        Copy-Item "$ggcommon\README.md" $buildrepo
-        Copy-Item -Recurse "$ggcommon\GG" $buildrepo
+        Copy-Item "$GGCommon\README.md" $BuildRepo
+        Copy-Item -Recurse "$GGCommon\GG" $BuildRepo
         
-        Remove-Item -Recurse -Force $ggrepo
+        Remove-Item -Recurse -Force $GGRepo
 
-        $reponame = Split-Path $buildrepo -Leaf
-        $datestr = Get-Date -Format "MM.dd.yyyy @ HH:mm (UTCK)"
-        (((Get-Content "$buildrepo\README.md" -Raw) -Replace "<REPO_NAME>",$reponame) -Replace "<DATE_STRING>",$datestr) | Set-Content "$buildrepo\README.md"
+        $DateString = Get-Date -Format "MM.dd.yyyy @ HH:mm (UTCK)"
+        (((Get-Content "$BuildRepo\README.md" -Raw) -Replace "<REPO_NAME>",$RepoName) -Replace "<DATE_STRING>",$DateString) | Set-Content "$BuildRepo\README.md"
         
         .\setup.ps1
         Remove-Item ".\setup.ps1"
@@ -46,4 +48,11 @@ else {
         git add .
         git commit -m "Initial commit"
     }
+}
+
+if ($args.count -ne 1) {
+    Write-Error "Expected <module_name> argument!"
+}
+else {
+    Main $args[0]
 }
