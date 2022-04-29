@@ -27,7 +27,7 @@ Here's the current list of requirements and supported auxiliaries:
 - `PowerShell` - All the central scripts that operate this repository run using PowerShell `.ps1` scripts (for now). You can download it from [docs.microsoft.com][2]!
 
 #### Auxiliary (optional)
-- `python` *(highly-recommended)* - Python 3 is the primary version GitGhost supports. Download link at [python.org][3]!
+- `python` *\*highly-recommended\** - Python 3 is the primary version GitGhost supports. Download link at [python.org][3]!
 - `VSCode` - VSCode extensions and integrated support for many other tools makes it a good companion! Grab a copy from [code.visualstudio.com][4]!
 
 [1]: <https://git-scm.com/downloads> "Git downloads"
