@@ -1,9 +1,10 @@
+$GGRepo = Split-Path $MyInvocation.MyCommand.Path -Parent
+
 function Main {
     param (
         $GGMod
     )
-
-    $GGRepo      = Split-Path $MyInvocation.MyCommand.Path -Parent
+    
     $GGResources = "$GGRepo\resources"
     $GGCommon    = "$GGResources\common"
     $GGModule    = "$GGRepo\modules\$GGMod"
