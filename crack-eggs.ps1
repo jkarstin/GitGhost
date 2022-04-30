@@ -103,7 +103,7 @@ function Crack-Egg {
     Move-Item "$GG_KITCHEN\$Carton\$Egg.egg" $Kitchen
     Set-Location "$Kitchen\$Egg.egg"
 
-    Invoke-Expression ".\$CRACK_SCRIPT $Kitchen"
+    Invoke-Expression ".\$CRACK_SCRIPT"
 }
 
 

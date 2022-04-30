@@ -1,6 +1,15 @@
-Move-Item ".\.yolk\*" "..\"
+$EGG     = Split-Path $MyInvocation.MyCommand.Path -Parent
+$KITCHEN = Resolve-Path "$EGG\.."
+$YOLK    = "$EGG\.yolk"
 
-Set-Location "..\"
+if (Test-Path "$KITCHEN\.gitignore") {
+    Add-Content "$KITCHEN\.gitignore" "`n`n#$(Split-Path $Egg -Leaf)`n$(Get-Content "$YOLK\.gitignore")"
+    Remove-Item "$YOLK\.gitignore"
+}
+
+Move-Item "$YOLK\*" $KITCHEN
+
+Set-Location $KITCHEN
 
 python -m venv env
 .\Scripts\activate
