@@ -1,4 +1,4 @@
-$GG_KITCHEN = $MyInvocation.MyCommand.Path -Parent
+$GG_KITCHEN = Split-Path $MyInvocation.MyCommand.Path -Parent
 $START_PWD = $Pwd
 
 Set-Location $GG_KITCHEN
