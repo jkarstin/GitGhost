@@ -128,8 +128,8 @@ function Git-Up-And-Ghost {
 
     Log "Time for the finishing touch!"
 
-    Init-Git $Kitchen
     Ghost-Kitchen $Kitchen
+    Init-Git $Kitchen
 }
 
 
