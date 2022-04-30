@@ -6,11 +6,10 @@ if (Split-Path $GG -Leaf -ne "GG") {
 }
 
 $Kitchen = Resolve-Path "$GG\.."
+Set-Location $Kitchen
 
 if (Test-Path "$Kitchen\.git") {
-    Set-Location $Kitchen
     git remote rm origin
 }
 
-Set-Location "$Kitchen\.."
 Remove-Item -Recurse -Force "$Kitchen\*"
