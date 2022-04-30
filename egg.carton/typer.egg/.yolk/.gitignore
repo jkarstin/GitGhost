@@ -1,4 +1,4 @@
 env/
-*.ps1
+#*.ps1
 __pycache__/
 .pytest_cache/

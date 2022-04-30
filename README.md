@@ -5,19 +5,19 @@ This repository is designed to automate the setup of a project, including settin
 
 ---
 
-## !!! IMPORTANT !!!
-The nature of this repository is such that, executing the scripts is **<ins>designed to remove the repository from your local machine!</ins>**
+## !!! DON'T COUNT YOUR GHOSTLINGS BEFORE THEY HATCH !!!
+The nature of this repository is such that, executing the scripts is **<ins>designed to fundamentally change in the process of a successful execution!</ins>** This means that once the tool has done what it is supposed to do, it will not be able to be easily reverted back to it's original form.
 
-As such, it is *vital* that you **read through the entirety of this README <ins>before</ins> executing any of the steps listed**, because if anything goes wrong, you likely will not have this guide to help, and you will need to delete everything and clone the repository again.
+As such, it is *\*vital\** that you **<ins>read through the entirety of this README *before* executing any of the steps listed</ins>**, because if anything goes wrong, this help information will likely no longer be around, and you will need to delete everything and clone the repository again.
 
-I have added a `build-safe.ps1` script if you want to keep this README file after everything is done, but you will then need to do your own cleanup, and it is just easier for everyone to listen to gramma:
-> "Make sure you read through the whole recipe before you start cooking!" ~Your Gramma
+I have added a `crack-eggs.safe` script if you want to keep all the original repo files, but you will then need to do your own cleanup, and it is just easier for everyone to listen to Gramma Ghoulie:
+> "Make sure you read through the whole recipe before you start cracking eggs! It's much easier to take the yolk from the egg than it is to put it back in." ~Gramma Ghoulie
 
-*You have been warned...*
+*You have been warned... (with \*love\* of course)*
 
 ---
 
-## Requirements
+## Kitchen Prep!
 In order to take advantage of this repo, you will need a base set of pre-existing programs. GitGhost is written to wrap around Git and ~~aims to~~ provide support (both moral and development-wise) for a variety of other aids as well!
 
 Here's the current list of requirements and supported auxiliaries:
@@ -28,6 +28,7 @@ Here's the current list of requirements and supported auxiliaries:
 
 #### Auxiliary (optional)
 - `python` *\*highly-recommended\** - Python 3 is the primary version GitGhost supports. Download link at [python.org][3]!
+    + *Psssssst... future plans for this tool aim to have the core scripting done in Python 3, so definitely get python if you plan to use this for future updates ;)*
 - `VSCode` - VSCode extensions and integrated support for many other tools makes it a good companion! Grab a copy from [code.visualstudio.com][4]!
 
 [1]: <https://git-scm.com/downloads> "Git downloads"
@@ -40,23 +41,23 @@ Here's the current list of requirements and supported auxiliaries:
 ## Usage
 Since you have likely cloned this repo in order to use it, you will want to interact with it from a specific location.
 1. Locate the directory in which you wish to build your python environment. This is where you will want to clone this repo into.
-    - **[NOTE]:** If you did not clone this repo into the chosen directory, feel free to run the `reset.ps1` script which was created to simplify this process for you.
+    - **[NOTE]:** If you did not clone this repo into the chosen directory, feel free to run the `wrong-kitchen` script which was created to simplify this process for you.
     
 ```
-.\reset.ps1 <path_to_target_repo>
+wrong-kitchen <path_to_correct_repo>
 ```
 
-2. Once you are located at the target repo directory (of which the `GitGhost` repo should be a subdirectory by now), run the `build.ps1` script as follows, where `<project_module>` is the name of a supported project module:
+2. Once you are located at the target repo directory (of which the `GitGhost` repo should be a subdirectory by now), run the `crack-eggs` script as follows, where `<egg_name>` is the name of a supported project `egg` [See subsection **Current Egg Carton Selection**]:
 
 ```
-.\GitGhost\build.ps1 <project_module>
+GitGhost\crack-eggs <egg_name>
 ```
 
-#### Currently-supported project modules
+#### Current Egg Carton Selection
 - `pygame` - Moderately low-level Python library framework for developing video games using Python3
 - `typer`  - Python command-line application library framework for developing command-line tools using Python3
 - ... ***<ins>AND MORE</ins>*** (*soon...*)
 
 ---
 
-*Developed by J Karstin Neill, 2022*
+*Developed by J Karstin Neill (with help from Gramma Ghoulie), 2022*

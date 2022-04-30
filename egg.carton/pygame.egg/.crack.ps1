@@ -1,5 +1,9 @@
+Move-Item ".\.yolk\*" "..\"
+
+Set-Location "..\"
+
 python -m venv env
-./Scripts/activate
+.\Scripts\activate
 python -m pip install --upgrade pip
 python -m pip install -r "requirements-dev.txt"
 
