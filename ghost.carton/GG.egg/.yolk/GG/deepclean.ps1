@@ -13,4 +13,4 @@ if (Test-Path "$Kitchen\.git") {
 }
 
 Set-Location "$Kitchen\.."
-Remove-Item -Recurse -Force $Kitchen
+Remove-Item -Recurse -Force "$Kitchen\*"
