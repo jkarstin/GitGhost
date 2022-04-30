@@ -3,7 +3,14 @@ $KITCHEN = Resolve-Path "$EGG\.."
 $YOLK    = "$EGG\.yolk"
 
 if (Test-Path "$KITCHEN\.gitignore") {
-    Add-Content "$KITCHEN\.gitignore" "`n`n#$(Split-Path $Egg -Leaf)`n$(Get-Content "$YOLK\.gitignore")"
+    $EggGitIgnoreContent = Get-Content "$YOLK\.gitignore"
+
+    $EggGitIgnore = ""
+    foreach ($Line in $EggGitIgnoreContent) {
+        $EggGitIgnore += "`n$Line"
+    }
+
+    Add-Content "$KITCHEN\.gitignore" "`n`n#$(Split-Path $Egg -Leaf)$EggGitIgnore"
     Remove-Item "$YOLK\.gitignore"
 }
 
