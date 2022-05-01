@@ -53,6 +53,8 @@ function Prep-Kitchen {
     Detach-Git $GG_KITCHEN
 
     New-Item "$NewKitchen\.kitchen" -ItemType "directory"
+
+    return $NewKitchen
 }
 
 
