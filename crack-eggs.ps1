@@ -31,7 +31,7 @@ function Execute-Main {
         Error-Exit "Expected at least one <egg_name> argument!" $ERROR_INCORRECT_USAGE
     }
 
-    $NewKitchen = Prep-Kitchen
+    $NewKitchen, $_ = Prep-Kitchen
 
     $GhostCarton = "ghost.carton"
     $EggCarton   = "egg.carton"
@@ -53,8 +53,6 @@ function Prep-Kitchen {
     Detach-Git $GG_KITCHEN
 
     New-Item "$NewKitchen\.kitchen" -ItemType "directory"
-
-    return $NewKitchen
 }
 
 
