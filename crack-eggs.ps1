@@ -52,6 +52,8 @@ function Prep-Kitchen {
     $NewKitchen = Resolve-Path "$GG_KITCHEN\.."
     Detach-Git $GG_KITCHEN
 
+    New-Item "$NewKitchen\.kitchen" -ItemType "directory"
+
     return $NewKitchen
 }
 
@@ -178,6 +180,15 @@ function Init-Git {
     git init .
     git add .
     git commit -m 'Initial commit'
+
+    git branch -m master stable
+    git branch alpha
+    git branch dev
+
+    git branch alpha -u stable
+    git branch dev -u alpha
+
+    git checkout dev
 }
 
 
