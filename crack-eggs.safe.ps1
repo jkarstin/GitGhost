@@ -56,8 +56,8 @@ function Prep-Kitchen {
     $NewKitchen = Resolve-Path "$GG_KITCHEN\.."
     #Detach-Git $GG_KITCHEN
 
-    #Move-Item -Recurse "$GG_KITCHEN\.resources\.kitchen" $NewKitchen
-    Copy-Item "$GG_KITCHEN\.resources\.kitchen" $NewKitchen
+    #Move-Item "$GG_KITCHEN\.resources\.kitchen" $NewKitchen
+    Copy-Item -Recurse "$GG_KITCHEN\.resources\.kitchen" $NewKitchen
 
     $Floorplan = Get-Item "$NewKitchen\.kitchen\.floorplan"
     (Get-Content $Floorplan -Replace "<KITCHEN_NAME>", "$(Split-Path $NewKitchen -Leaf)") | `

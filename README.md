@@ -23,6 +23,7 @@ This repository is designed to automate the setup of a project, including settin
 [3]: <https://github.com/jkarstin/GitGhost/tree/dev> "Development branch"
 [5]: <https://github.com/jkarstin/GitGhost/milestone/1> "Alpha Build v0.1.0-alpha Milestone"
 
+
 ---
 
 
