@@ -106,6 +106,8 @@ function Crack-Egg {
     Set-Location "$Kitchen\$Egg.egg"
 
     Invoke-Expression ".\$CRACK_SCRIPT"
+
+    New-Item "$Kitchen\.kitchen\$Egg.ghost" -ItemType "file"
 }
 
 
