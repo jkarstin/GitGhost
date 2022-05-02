@@ -72,7 +72,7 @@ function Prep-Kitchen {
 
     $Floorplan = Get-Item "$NewKitchen\.kitchen\.floorplan"
 
-    $SousChef = "GitGhost $((Get-Content "$GG_KITCHEN\.meta" -Raw).Split(":").Trim())"
+    $SousChef = "GitGhost $((Get-Content "$GG_KITCHEN\.meta" -Raw).Split(":")[1].Trim())"
 
     (
         (
