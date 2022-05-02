@@ -52,7 +52,9 @@ function Prep-Kitchen {
     $NewKitchen = Resolve-Path "$GG_KITCHEN\.."
     #Detach-Git $GG_KITCHEN
 
-    $_ = New-Item "$NewKitchen\.kitchen" -ItemType "directory"
+    $DotKitchen = New-Item "$NewKitchen\.kitchen" -ItemType "directory"
+    $Floorplan = New-Item "$DotKitchen\.floorplan" -ItemType "file"
+    Add-Content $Floorplan "#$(Split-Path $NewKitchen -Leaf).floorplan"
 
     return $NewKitchen
 }
@@ -106,7 +108,20 @@ function Crack-Egg {
     Copy-Item -Recurse "$GG_KITCHEN\$Carton\$Egg.egg" $Kitchen
     Set-Location "$Kitchen\$Egg.egg"
 
+    Summon-Ghost $Egg $Kitchen
+
     Invoke-Expression ".\$CRACK_SCRIPT"
+}
+
+
+function Summon-Ghost {
+    param (
+        [string] $Egg,
+        [string] $Kitchen
+    )
+
+    $EggGhost = New-Item "$Kitchen\.kitchen\$Egg.ghost" -ItemType "file"
+    Add-Content $EggGhost "#$Egg.ghost"
 }
 
 
