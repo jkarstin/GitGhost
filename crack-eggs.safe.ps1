@@ -60,7 +60,7 @@ function Prep-Kitchen {
     Copy-Item -Recurse "$GG_KITCHEN\.resources\.kitchen" $NewKitchen
 
     $Floorplan = Get-Item "$NewKitchen\.kitchen\.floorplan"
-    (Get-Content $Floorplan -Replace "<KITCHEN_NAME>", "$(Split-Path $NewKitchen -Leaf)") | `
+    (Get-Content $Floorplan -Raw) -Replace "<KITCHEN_NAME>", "$(Split-Path $NewKitchen -Leaf)" | `
     Set-Content $Floorplan
 
     return $NewKitchen

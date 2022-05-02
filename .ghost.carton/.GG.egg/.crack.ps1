@@ -6,7 +6,7 @@ if (Test-Path "$KITCHEN\.gitignore") {
     Add-Content "$KITCHEN\.gitignore" ""
 }
 else{
-    New-Item "$KITCHEN\.gitignore" 
+    $_ = New-Item "$KITCHEN\.gitignore" 
 }
 Add-Content "$KITCHEN\.gitignore" "#$(Split-Path $EGG -Leaf)"
 Get-Content "$YOLK\.gitignore" | Add-Content "$KITCHEN\.gitignore"
