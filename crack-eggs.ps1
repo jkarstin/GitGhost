@@ -55,10 +55,12 @@ function Prep-Kitchen {
 
     if ($SAFE_MODE) {
         Copy-Item -Recurse "$GG_KITCHEN\.resources\.kitchen" $NewKitchen
+        Copy-Item "$GG_KITCHEN\.resources\.gitignore" $NewKitchen
     }
     else {
         Detach-Git $GG_KITCHEN
         Move-Item "$GG_KITCHEN\.resources\.kitchen" $NewKitchen
+        Move-Item "$GG_KITCHEN\.resources\.gitignore" $NewKitchen
     }
 
     $Floorplan = Get-Item "$NewKitchen\.kitchen\.floorplan"
