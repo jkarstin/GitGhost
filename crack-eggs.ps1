@@ -7,7 +7,7 @@
 #####################################
 
 
-### CONSTANTS ###
+### CONSTANTS & FLAGS ###
 
 $GG_KITCHEN = Split-Path $MyInvocation.MyCommand.Path -Parent
 
@@ -20,6 +20,8 @@ $ERROR_DETACH_GIT      =   2
 $ERROR_EGG_NOT_FOUND   = 404
 $ERROR_DECOY_EGG       =  69
 
+$Global:SAFE_MODE = $False
+
 
 ### MAIN FUNCTION DEFINITION ###
 
@@ -29,17 +31,13 @@ function Execute-Main {
         [int]      $Argc
     )
 
-    if ($Argc -lt 1) {
-        Error-Exit "Expected at least one <egg_name> argument!" $ERROR_INCORRECT_USAGE
-    }
-
-    $NewKitchen = Prep-Kitchen
-
     $GhostCarton = ".ghost.carton"
     $EggCarton   = "egg.carton"
 
     $GhostEggs = @(".GG")
-    $Eggs      = $Argv
+    $Eggs = Parse-Argv $Argv $Argc
+
+    $NewKitchen = Prep-Kitchen
     
     Get-Cracking $GhostEggs $GhostCarton $NewKitchen
     Get-Cracking $Eggs $EggCarton $NewKitchen
@@ -54,9 +52,14 @@ function Prep-Kitchen {
     Log "Preparing kitchen for impending egg cracking..."
 
     $NewKitchen = Resolve-Path "$GG_KITCHEN\.."
-    Detach-Git $GG_KITCHEN
 
-    Move-Item "$GG_KITCHEN\.resources\.kitchen" $NewKitchen
+    if ($SAFE_MODE) {
+        Copy-Item -Recurse "$GG_KITCHEN\.resources\.kitchen" $NewKitchen
+    }
+    else {
+        Detach-Git $GG_KITCHEN
+        Move-Item "$GG_KITCHEN\.resources\.kitchen" $NewKitchen
+    }
 
     $Floorplan = Get-Item "$NewKitchen\.kitchen\.floorplan"
     (Get-Content $Floorplan -Raw) -Replace "<KITCHEN_NAME>", "$(Split-Path $NewKitchen -Leaf)" | `
@@ -110,7 +113,13 @@ function Crack-Egg {
 
     Log "Looks like a fine egg! Cracking into kitchen '$(Split-Path $Kitchen -Leaf)'..."
 
-    Move-Item "$GG_KITCHEN\$Carton\$Egg.egg" $Kitchen
+    if ($SAFE_MODE) {
+        Copy-Item -Recurse "$GG_KITCHEN\$Carton\$Egg.egg" $Kitchen
+    }
+    else {
+        Move-Item "$GG_KITCHEN\$Carton\$Egg.egg" $Kitchen
+    }
+    
     Set-Location "$Kitchen\$Egg.egg"
 
     Summon-Ghost $Egg $Kitchen
@@ -164,13 +173,40 @@ function Ghost-Kitchen {
     )
 
     Set-Location $Kitchen
-    Remove-Item -Recurse -Force $GG_KITCHEN
+
+    if (-Not $SAFE_MODE) {
+        Remove-Item -Recurse -Force $GG_KITCHEN
+    }
 
     Log "See-ya! *vanishes in a poof*"
 }
 
 
 ### UTILITY FUNCTIONS ###
+
+function Parse-Argv {
+    param (
+        [string[]] $Argv,
+        [int]      $Argc
+    )
+
+    if ($Argc -lt 1) {
+        Error-Exit "Expected at least one <egg_name> argument!" $ERROR_INCORRECT_USAGE
+    }
+
+    $ArgvParsed = @()
+    foreach ($Arg in $Argv) {
+        if ($Arg.ToLower() -eq "--safe") {
+            $Global:SAFE_MODE = $True
+        }
+        else {
+            $ArgvParsed += $Arg
+        }
+    }
+
+    return $ArgvParsed
+}
+
 
 function Detach-Git {
     param (
@@ -203,7 +239,7 @@ function Init-Git {
     git init .
     git checkout -B stable
     git add .
-    git commit -m 'Initial commit'
+    git commit -m "Initial commit"
     
     git branch --track alpha stable
     git branch --track dev alpha
