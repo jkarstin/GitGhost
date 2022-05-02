@@ -55,6 +55,8 @@ function Prep-Kitchen {
     $DotKitchen = New-Item "$NewKitchen\.kitchen" -ItemType "directory"
     $Floorplan = New-Item "$DotKitchen\.floorplan" -ItemType "file"
     Add-Content $Floorplan "#$(Split-Path $NewKitchen -Leaf).floorplan"
+    $KitchenGitIgnore = New-Item "$NewKitchen\.gitignore" -ItemType "file"
+    Add-Content $KitchenGitIgnore ".kitchen/"
 
     return $NewKitchen
 }
