@@ -83,7 +83,7 @@ function Prep-Kitchen {
             ) -Replace "<CHEF_NAME>", $Chef
         ) -Replace "<SOUS_CHEF_NAME>", $SousChef
     ) -Replace "<EGGS>", "$Eggs" | `
-    Set-Content $Floorplan
+    Set-Content -NoNewLine $Floorplan
 
     return $NewKitchen
 }
