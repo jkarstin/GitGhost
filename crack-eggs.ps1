@@ -1,8 +1,10 @@
-#################################
-# crack-eggs.ps1
-#-------------------------------
-# J Karstin Neill    04.29.2022
-#################################
+#####################################
+# crack-eggs.ps1     [v0.1.0-alpha] #
+#===================================#
+#                                   #
+#-----------------------------------#
+# J Karstin Neill        05.02.2022 #
+#####################################
 
 
 ### CONSTANTS ###
@@ -33,10 +35,10 @@ function Execute-Main {
 
     $NewKitchen = Prep-Kitchen
 
-    $GhostCarton = "ghost.carton"
+    $GhostCarton = ".ghost.carton"
     $EggCarton   = "egg.carton"
 
-    $GhostEggs = @("GG")
+    $GhostEggs = @(".GG")
     $Eggs      = $Argv
     
     Get-Cracking $GhostEggs $GhostCarton $NewKitchen
@@ -46,17 +48,19 @@ function Execute-Main {
 }
 
 
+### SOUS-CHEF FUNCTIONS ###
+
 function Prep-Kitchen {
     Log "Preparing kitchen for impending egg cracking..."
 
     $NewKitchen = Resolve-Path "$GG_KITCHEN\.."
     Detach-Git $GG_KITCHEN
 
-    $DotKitchen = New-Item "$NewKitchen\.kitchen" -ItemType "directory"
-    $Floorplan = New-Item "$DotKitchen\.floorplan" -ItemType "file"
-    Add-Content $Floorplan "#$(Split-Path $NewKitchen -Leaf).floorplan"
-    $KitchenGitIgnore = New-Item "$NewKitchen\.gitignore" -ItemType "file"
-    Add-Content $KitchenGitIgnore ".kitchen/"
+    Move-Item -Recurse "$GG_KITCHEN\.resources\.kitchen" $NewKitchen
+
+    $Floorplan = Get-Item "$NewKitchen\.kitchen\.floorplan"
+    (Get-Content $Floorplan -Replace "<KITCHEN_NAME>", "$(Split-Path $NewKitchen -Leaf)") | `
+    Set-Content $Floorplan
 
     return $NewKitchen
 }
@@ -139,6 +143,8 @@ function Cleanup-Eggshell {
     Log "*washes hands* Alright, what's next?..."
 }
 
+
+### CHEF FUNCTIONS ###
 
 function Git-Up-And-Ghost {
     param (
