@@ -52,7 +52,7 @@ function Execute-Main {
 
 function Prep-Kitchen {
     param (
-        [string]   $Chef
+        [string]   $Chef,
         [string[]] $Eggs
     )
 
