@@ -194,17 +194,12 @@ function Init-Git {
     Set-Location $RepoPath
 
     git init .
-    git branch -m master stable
+    git checkout -B stable
     git add .
     git commit -m 'Initial commit'
     
-    git branch alpha
-    git branch dev
-
-    git branch alpha -u stable
-    git branch dev -u alpha
-
-    git checkout stable
+    git branch --track alpha stable
+    git branch --track dev alpha
 }
 
 
