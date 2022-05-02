@@ -1,10 +1,10 @@
-#####################################
-# crack-eggs.ps1     [v0.1.0-alpha] #
-#===================================#
-#                                   #
-#-----------------------------------#
-# J Karstin Neill        05.02.2022 #
-#####################################
+####################################
+# crack-eggs.ps1    [v0.1.0-alpha] #
+#==================================#
+#                                  #
+#----------------------------------#
+# J Karstin Neill       05.02.2022 #
+####################################
 
 
 ### CONSTANTS & FLAGS ###
@@ -43,6 +43,8 @@ function Execute-Main {
     Get-Cracking $Eggs $EggCarton $NewKitchen
 
     Git-Up-And-Ghost $NewKitchen
+
+    Exit $EXIT_SUCCESS
 }
 
 
@@ -270,4 +272,4 @@ function Error-Exit {
 
 ### MAIN FUNCTION EXECUTION ###
 
-Execute-Main $args $args.count
+Execute-Main $Args $Args.count
