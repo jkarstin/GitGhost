@@ -11,11 +11,11 @@ This repository is designed to automate the setup of a project, including settin
 ---
 
 
-## Navigation: Versions & Branches
+## Navigation: Branches & Versions
 
-- **<ins>[Stable version][1]</ins>:**       *none*
-- **<ins>[Alpha version][2]</ins>:**        *none*
-- **<ins>[Development version][3]</ins>:**  [v0.1.0-alpha][5]
+- **<ins>[Stable Branch][1]</ins>:**       *none*
+- **<ins>[Alpha Branch][2]</ins>:**        *none*
+- **<ins>[Development Branch][3]</ins>:**  [v0.1.0-alpha][5]
 
 
 [1]: <https://github.com/jkarstin/GitGhost> "Stable branch (default)"
