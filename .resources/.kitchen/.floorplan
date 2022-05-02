@@ -1,4 +1,4 @@
 kitchen: <KITCHEN_NAME>
-sous-chef: <SOUS_CHEF_NAME>
 chef: <CHEF_NAME>
+sous-chef: <SOUS_CHEF_NAME>
 eggs: [<EGGS>]

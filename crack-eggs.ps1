@@ -37,7 +37,7 @@ function Execute-Main {
     $GhostEggs = @(".GG")
     $Eggs = Parse-Argv $Argv $Argc
 
-    $NewKitchen = Prep-Kitchen
+    $NewKitchen = Prep-Kitchen "J Karstin Neill" $GhostEggs, $Eggs
     
     Get-Cracking $GhostEggs $GhostCarton $NewKitchen
     Get-Cracking $Eggs $EggCarton $NewKitchen
@@ -51,6 +51,11 @@ function Execute-Main {
 ### SOUS-CHEF FUNCTIONS ###
 
 function Prep-Kitchen {
+    param (
+        [string]   $Chef
+        [string[]] $Eggs
+    )
+
     Log "Preparing kitchen for impending egg cracking..."
 
     $NewKitchen = Resolve-Path "$GG_KITCHEN\.."
@@ -66,7 +71,18 @@ function Prep-Kitchen {
     }
 
     $Floorplan = Get-Item "$NewKitchen\.kitchen\.floorplan"
-    (Get-Content $Floorplan -Raw) -Replace "<KITCHEN_NAME>", "$(Split-Path $NewKitchen -Leaf)" | `
+
+    $SousChef = "GitGhost $((Get-Content "$GG_KITCHEN\.meta" -Raw).Split(":").Trim())"
+
+    (
+        (
+            (
+                (
+                    Get-Content $Floorplan -Raw
+                ) -Replace "<KITCHEN_NAME>", "$(Split-Path $NewKitchen -Leaf)"
+            ) -Replace "<CHEF_NAME>", $Chef
+        ) -Replace "<SOUS_CHEF_NAME>", $SousChef
+    ) -Replace "<EGGS>", "$Eggs" | `
     Set-Content $Floorplan
 
     return $NewKitchen
@@ -126,7 +142,7 @@ function Crack-Egg {
     
     Set-Location "$Kitchen\$Egg.egg"
 
-    Summon-Ghost $Egg $Kitchen
+    $EggGhost = Summon-Ghost $Egg $Kitchen
 
     Invoke-Expression ".\$CRACK_SCRIPT"
 }
@@ -140,6 +156,8 @@ function Summon-Ghost {
 
     $EggGhost = New-Item "$Kitchen\.kitchen\$Egg.ghost" -ItemType "file"
     Add-Content $EggGhost "#$Egg.ghost"
+
+    return $EggGhost
 }
 
 
